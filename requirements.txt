@@ -6,6 +6,4 @@ python-dotenv
 pydantic
 SQLAlchemy==1.4.0
 httpx
-
-
-
+requests

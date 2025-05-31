@@ -110,8 +110,7 @@ async def lifespan(app: FastAPI):
 #APP
 # Create the FastAPI app with lifespan
 app = FastAPI(lifespan=lifespan)
-templates = Jinja2Templates(directory = "frontend")
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
