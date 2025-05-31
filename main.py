@@ -125,14 +125,9 @@ app.add_middleware(
 
 
 #ROUTES
- 
 @app.get("/")
-def index():
-    return HTMLResponse("""
-    <h1>Google OAuth2 Login</h1>
-    <a href="/auth">Login with Google</a>
-    """)   
-
+def get_status():
+    return {"status":"healthy"}
 
 
 @app.get("/auth")
@@ -180,8 +175,7 @@ async def callback(request: Request,db:Session=Depends(get_db)):
         )
         user_info = user_resp.json()
 
-    print(user_info["email"])
-    print(user_info["name"])
+    #ADD TO DB
     new_product=models.Mail(email = user_info["email"])
     db.add(new_product)
     db.commit()
@@ -191,22 +185,6 @@ async def callback(request: Request,db:Session=Depends(get_db)):
     # Redirect to frontend Welcome page with username
     username = urllib.parse.quote(user_info["name"])  # Encode for URL safety
     return RedirectResponse(url=f"http://localhost:3000/welcome/{username}")
-
-
-
-@app.get("/signup")
-def get_signup_page(request:Request, response_class=HTMLResponse):
-    return templates.TemplateResponse("index.html", {"request":request})
-
-
-@app.post("/subscribe")
-def insert_mails(email_subscriber:subscribers ,db:Session=Depends(get_db)):
-    new_product=models.Mail(email = email_subscriber.email)
-    db.add(new_product)
-    db.commit()
-    db.refresh(new_product)
-    return {"added":new_product}
-
 
 @app.get("/send")
 def final_send(request:Request):
