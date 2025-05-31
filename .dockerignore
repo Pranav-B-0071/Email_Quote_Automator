@@ -1,0 +1,36 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Editor and OS generated files
+*.swp
+*.swo
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Docker files that shouldn't be copied
+.dockerignore
+Dockerfile
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Frontend build (if any)
+frontend/node_modules/
+frontend/dist/

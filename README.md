@@ -1,0 +1,1 @@
+Simply doing a project on email automation .
