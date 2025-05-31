@@ -20,7 +20,6 @@ import urllib.parse
 #LOAD ENV AND BIND MODELS TO ENGINE
 load_dotenv()
 my_api_key=os.getenv("API_KEY")
-models.Base.metadata.create_all(bind = engine)
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
@@ -73,6 +72,7 @@ async def lifespan(app: FastAPI):
     print("Starting async scheduler loop...")
     app.state.redis = Redis(host="localhost", port=6379)
     app.state.http_client = httpx.AsyncClient()
+    models.Base.metadata.create_all(bind = engine)
 
     #connect to the postgres server
     while True:
