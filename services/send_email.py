@@ -1,16 +1,16 @@
 import smtplib
 from email.mime.text import MIMEText
-import os
 from dotenv import load_dotenv
+import os
 
+# Load environment variables
 load_dotenv()
 
-# Access variables
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = int(os.getenv("SMTP_PORT"))
 SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
+USERNAME = os.getenv("USERNAME_EMAIL")
+PASSWORD = os.getenv("PASSWORD")  # App password
 
 def send_mails(content: str, emails: list) -> dict:
     subject = "motivation"
@@ -27,4 +27,5 @@ def send_mails(content: str, emails: list) -> dict:
     except Exception as e:
         return {"status": f"Not sent Successfully! Error: {str(e)}"}
 
-
+if __name__ =="__main__":
+    print(SMTP_SERVER, SMTP_PORT, SENDER_EMAIL, USERNAME, PASSWORD)
